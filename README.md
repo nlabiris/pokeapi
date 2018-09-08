@@ -1,11 +1,7 @@
 # PokéAPI
 
-[![GitHub latest release][ico-version]][link-github]
-[![Software License][ico-license]](LICENSE.md)
-<!-- [![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads] -->
+[![Software License](https://img.shields.io/github/license/nlabiris/pokeapi.svg)](LICENSE.md)
+[![GitHub (pre-)release](https://img.shields.io/badge/alpha-v0.0.1-red.svg)](https://github.com/nlabiris/pokeapi/releases)
 
 A Pokémon API written in C# using ASP.NET Web API 2. All the data are comes from [https://github.com/veekun/pokedex](veekun pokedex) and are hosted in a MySQL server. The solution is created using Visual Studio 2017.
 
@@ -70,9 +66,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## License
 
 This project is licensed under the GNU Affero General Public License v3.0 (AGPLv3). Please see [License File](LICENSE.md) for more information.
-
-[ico-version]: https://img.shields.io/github/release/qubyte/rubidium.svg
-[ico-license]: https://img.shields.io/badge/License-AGPL%20v3-green.svg
-[link-author]: https://github.com/nlabiris
-[link-contributors]: ../../contributors
-[link-github]: https://github.com/nlabiris/pokeapi/releases
