@@ -175,5 +175,76 @@ WHERE `id` = @pokemon_id";
             WHERE `id` = @fling_effect_id";
             }
         }
+
+        public static string GetAllAbilities {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`,
+                `generation_id`,
+                `is_main_series`
+FROM `abilities`";
+            }
+        }
+
+        public static string GetSpecificAbility {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`,
+                `generation_id`,
+                `is_main_series`
+FROM `abilities`
+WHERE `id` = @ability_id";
+            }
+        }
+
+        public static string GetSpecificAbilityChangelog {
+            get {
+                return @"
+                SELECT `id`,
+                `ability_id`,
+                `changed_in_version_group_id`
+FROM `ability_changelog`
+WHERE `ability_id` = @ability_id";
+            }
+        }
+
+        public static string GetSpecificVersionGroup {
+            get {
+                return @"
+SELECT `id`, 
+`identifier`, 
+`generation_id`, 
+`order` 
+FROM `version_groups` 
+WHERE `id` = @version_group_id";
+            }
+        }
+
+        public static string GetSpecificAbilityChangelogProse {
+            get {
+                return @"
+                SELECT `ability_changelog_id`,
+                `local_language_id`,
+                `effect`
+                FROM `ability_changelog_prose`
+                WHERE `ability_changelog_id` = @ability_changelog_id";
+            }
+        }
+
+        public static string GetSpecificLanguage {
+            get {
+                return @"
+                SELECT `id`, 
+                `iso639`, 
+                `iso3166`, 
+                `identifier`, 
+                `official`, 
+                `order`
+                FROM `languages`
+                WHERE `id` = @language_id";
+            }
+        }
     }
 }

@@ -14,7 +14,17 @@ namespace PokeAPI.Controllers {
         [HttpGet]
         [Route("api/abilities")]
         public IEnumerable<Ability> GetAllAbilities() {
-            return _abilityCtx.All();
+            return _abilityCtx.AllAbilities();
+        }
+
+        [HttpGet]
+        [Route("api/abilities/{ability_id}")]
+        public IHttpActionResult RetrievePokemon(int ability_id) {
+            Ability ability = _abilityCtx.GetAbility(ability_id);
+            if (ability == null) {
+                return NotFound();
+            }
+            return Ok(ability);
         }
     }
 }

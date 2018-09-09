@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using PokeAPI.Models;
 using PokeAPI.Helper;
-using MySql.Data.MySqlClient;
 using PokeAPI.DataAccess;
 
 namespace PokeAPI.Contexts {
