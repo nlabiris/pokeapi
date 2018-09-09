@@ -147,6 +147,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AbilityViewModel.cs" />
+    <Compile Include="ViewModels\GenerationViewModel.cs" />
+    <Compile Include="ViewModels\LanguageViewModel.cs" />
+    <Compile Include="ViewModels\RegionViewModel.cs" />
+    <Compile Include="ViewModels\VersionGroupsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
