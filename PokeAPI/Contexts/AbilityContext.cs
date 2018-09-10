@@ -47,17 +47,28 @@ namespace PokeAPI.Contexts {
                     }
 
                     a.AbilityChangelog = VM_Ability.RetrieveSpecificAbilityChangelog(connection, a.Id);
-                    if (a.AbilityChangelog != null && a.AbilityChangelog.ChangedInVersionGroup != null) {
-                        a.AbilityChangelog.ChangedInVersionGroup = VM_VersionGroups.RetrieveSpecificVersionGroups(connection, a.AbilityChangelog.ChangedInVersionGroup.Id);
-                        a.AbilityChangelog.AbilityChangelogProse = VM_Ability.RetrieveSpecificAbilityChangelogProse(connection, a.AbilityChangelog.Id);
-                        a.AbilityChangelog.AbilityChangelogProse.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, a.AbilityChangelog.AbilityChangelogProse.LocalLanguage.Id);
-
-                        if (a.AbilityChangelog.ChangedInVersionGroup.Generation != null) {
-                            a.AbilityChangelog.ChangedInVersionGroup.Generation = VM_Generation.RetrieveSpecificGeneration(connection, a.AbilityChangelog.ChangedInVersionGroup.Generation.Id);
-
-                            if (a.AbilityChangelog.ChangedInVersionGroup.Generation.MainRegion != null) {
-                                a.AbilityChangelog.ChangedInVersionGroup.Generation.MainRegion = VM_Region.RetrieveSpecificRegion(connection, a.AbilityChangelog.ChangedInVersionGroup.Generation.MainRegion.Id);
+                    foreach (AbilityChangelog ac in a.AbilityChangelog) {
+                        if (ac != null && ac.ChangedInVersionGroup != null) {
+                            ac.ChangedInVersionGroup = VM_VersionGroups.RetrieveSpecificVersionGroups(connection, ac.ChangedInVersionGroup.Id);
+                            ac.AbilityChangelogProse = VM_Ability.RetrieveSpecificAbilityChangelogProse(connection, ac.Id);
+                            foreach (AbilityChangelogProse acp in ac.AbilityChangelogProse) {
+                                acp.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, acp.LocalLanguage.Id);
                             }
+
+                            if (ac.ChangedInVersionGroup.Generation != null) {
+                                ac.ChangedInVersionGroup.Generation = VM_Generation.RetrieveSpecificGeneration(connection, ac.ChangedInVersionGroup.Generation.Id);
+
+                                if (ac.ChangedInVersionGroup.Generation.MainRegion != null) {
+                                    ac.ChangedInVersionGroup.Generation.MainRegion = VM_Region.RetrieveSpecificRegion(connection, ac.ChangedInVersionGroup.Generation.MainRegion.Id);
+                                }
+                            }
+                        }
+                    }
+
+                    a.AbilityName = VM_Ability.RetrieveSpecificAbilityName(connection, a.Id);
+                    foreach (AbilityName an in a.AbilityName) {
+                        if (an != null && an.LocalLanguage != null) {
+                            an.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, an.LocalLanguage.Id);
                         }
                     }
                 } // foreach
@@ -69,62 +80,40 @@ namespace PokeAPI.Contexts {
         public Ability GetAbility(int ability_id) {
             Ability ability = null;
             using (IDbConnection connection = database.CreateOpenConnection()) {
-                using (IDbCommand command = database.CreateCommand()) {
-                    command.Connection = connection;
-                    command.CommandText = Query.GetAllAbilities;
-                    command.Prepare();
-                    command.AddWithValue("@ability_id", ability_id);
-                    using (IDataReader reader = command.ExecuteReader()) {
-                        if (reader.Read()) {
-                            ability = new Ability {
-                                Id = reader.CheckValue<int>("id"),
-                                Identifier = reader.CheckObject<string>("identifier"),
-                                Generation = new Generation {
-                                    Id = reader.CheckValue<int>("generation_id")
-                                },
-                                IsMainSeries = reader.CheckValue<bool>("is_main_series")
-                            };
-                        }
-                    }
-                } // Command
-
+                ability = VM_Ability.RetrieveSpecificAbility(connection, ability_id);
                 if (ability == null) {
                     return ability;
                 }
+                ability.Generation = VM_Generation.RetrieveSpecificGeneration(connection, ability.Generation.Id);
+                    
+                if (ability.Generation != null && ability.Generation.MainRegion != null) {
+                    ability.Generation.MainRegion = VM_Region.RetrieveSpecificRegion(connection, ability.Generation.MainRegion.Id);
+                }
 
-                using (IDbCommand command = database.CreateCommand()) {
-                    command.Connection = connection;
-                    command.CommandText = Query.GetSpecificGeneration;
-                    command.Prepare();
-                    command.AddWithValue("@generations_id", ability.Generation.Id);
-                    using (IDataReader reader = command.ExecuteReader()) {
-                        while (reader.Read()) {
-                            ability.Generation = new Generation {
-                                Id = reader.CheckValue<int>("id"),
-                                MainRegion = new Region {
-                                    Id = reader.CheckValue<int>("main_region_id")
-                                },
-                                Identifier = reader.CheckObject<string>("identifier")
-                            };
+                ability.AbilityChangelog = VM_Ability.RetrieveSpecificAbilityChangelog(connection, ability.Id);
+                foreach (AbilityChangelog ac in ability.AbilityChangelog) {
+                    if (ac != null && ac.ChangedInVersionGroup != null) {
+                        ac.ChangedInVersionGroup = VM_VersionGroups.RetrieveSpecificVersionGroups(connection, ac.ChangedInVersionGroup.Id);
+                        ac.AbilityChangelogProse = VM_Ability.RetrieveSpecificAbilityChangelogProse(connection, ac.Id);
+                        foreach (AbilityChangelogProse acp in ac.AbilityChangelogProse) {
+                            acp.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, acp.LocalLanguage.Id);
                         }
-                    }
-                } // Command
 
-                if (ability.Generation.MainRegion != null) {
-                    using (IDbCommand command = database.CreateCommand()) {
-                        command.Connection = connection;
-                        command.CommandText = Query.GetSpecificRegion;
-                        command.Prepare();
-                        command.AddWithValue("@regions_id", ability.Generation.MainRegion.Id);
-                        using (IDataReader reader = command.ExecuteReader()) {
-                            while (reader.Read()) {
-                                ability.Generation.MainRegion = new Region {
-                                    Id = reader.CheckValue<int>("id"),
-                                    Identifier = reader.CheckObject<string>("identifier")
-                                };
+                        if (ac.ChangedInVersionGroup.Generation != null) {
+                            ac.ChangedInVersionGroup.Generation = VM_Generation.RetrieveSpecificGeneration(connection, ac.ChangedInVersionGroup.Generation.Id);
+
+                            if (ac.ChangedInVersionGroup.Generation.MainRegion != null) {
+                                ac.ChangedInVersionGroup.Generation.MainRegion = VM_Region.RetrieveSpecificRegion(connection, ac.ChangedInVersionGroup.Generation.MainRegion.Id);
                             }
                         }
-                    } // Command
+                    }
+                }
+
+                ability.AbilityName = VM_Ability.RetrieveSpecificAbilityName(connection, ability_id);
+                foreach (AbilityName an in ability.AbilityName) {
+                    if (an != null && an.LocalLanguage != null) {
+                        an.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, an.LocalLanguage.Id);
+                    }
                 }
                 connection.Close();
             } // Connection

@@ -55,46 +55,70 @@ namespace PokeAPI.ViewModels {
             return ability;
         }
 
-        public AbilityChangelog RetrieveSpecificAbilityChangelog(IDbConnection connection, int ability_id) {
-            AbilityChangelog abilityChangelog = null;
+        public List<AbilityChangelog> RetrieveSpecificAbilityChangelog(IDbConnection connection, int ability_id) {
+            List<AbilityChangelog> abilityChangelogs = new List<AbilityChangelog>();
             using (IDbCommand command = database.CreateCommand()) {
                 command.Connection = connection;
                 command.CommandText = Query.GetSpecificAbilityChangelog;
                 command.Prepare();
                 command.AddWithValue("@ability_id", ability_id);
                 using (IDataReader reader = command.ExecuteReader()) {
-                    if (reader.Read()) {
-                        abilityChangelog = new AbilityChangelog {
+                    while (reader.Read()) {
+                        AbilityChangelog abilityChangelog = new AbilityChangelog {
                             Id = reader.CheckValue<int>("id"),
                             ChangedInVersionGroup = new VersionGroups {
                                 Id = reader.CheckValue<int>("changed_in_version_group_id")
                             }
                         };
+                        abilityChangelogs.Add(abilityChangelog);
                     }
                 }
             } // Command
-            return abilityChangelog;
+            return abilityChangelogs;
         }
 
-        public AbilityChangelogProse RetrieveSpecificAbilityChangelogProse(IDbConnection connection, int ability_changelog_id) {
-            AbilityChangelogProse abilityChangelogProse = null;
+        public List<AbilityChangelogProse> RetrieveSpecificAbilityChangelogProse(IDbConnection connection, int ability_changelog_id) {
+            List<AbilityChangelogProse> abilityChangelogProses = new List<AbilityChangelogProse>();
             using (IDbCommand command = database.CreateCommand()) {
                 command.Connection = connection;
                 command.CommandText = Query.GetSpecificAbilityChangelogProse;
                 command.Prepare();
                 command.AddWithValue("@ability_changelog_id", ability_changelog_id);
                 using (IDataReader reader = command.ExecuteReader()) {
-                    if (reader.Read()) {
-                        abilityChangelogProse = new AbilityChangelogProse {
+                    while (reader.Read()) {
+                        AbilityChangelogProse abilityChangelogProse = new AbilityChangelogProse {
                             LocalLanguage = new Language {
                                 Id = reader.CheckValue<int>("local_language_id")
                             },
                             Effect = reader.CheckObject<string>("effect")
                         };
+                        abilityChangelogProses.Add(abilityChangelogProse);
                     }
                 }
             } // Command
-            return abilityChangelogProse;
+            return abilityChangelogProses;
+        }
+
+        public List<AbilityName> RetrieveSpecificAbilityName(IDbConnection connection, int ability_id) {
+            List<AbilityName> abilityNames = new List<AbilityName>();
+            using (IDbCommand command = database.CreateCommand()) {
+                command.Connection = connection;
+                command.CommandText = Query.GetSpecificAbilityName;
+                command.Prepare();
+                command.AddWithValue("@ability_id", ability_id);
+                using (IDataReader reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        AbilityName abilityName = new AbilityName {
+                            LocalLanguage = new Language {
+                                Id = reader.CheckValue<int>("local_language_id")
+                            },
+                            Name = reader.CheckObject<string>("name")
+                        };
+                        abilityNames.Add(abilityName);
+                    }
+                }
+            } // Command
+            return abilityNames;
         }
     }
 }

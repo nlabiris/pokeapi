@@ -9,6 +9,7 @@ namespace PokeAPI.Models {
         public string Identifier { get; set; }
         public Generation Generation { get; set; }
         public bool IsMainSeries { get; set; }
-        public AbilityChangelog AbilityChangelog { get; set; }
+        public List<AbilityChangelog> AbilityChangelog { get; set; }
+        public List<AbilityName> AbilityName { get; set; }
     }
 }

@@ -119,6 +119,7 @@
     <Compile Include="Models\Ability.cs" />
     <Compile Include="Models\AbilityChangelog.cs" />
     <Compile Include="Models\AbilityChangelogProse.cs" />
+    <Compile Include="Models\AbilityName.cs" />
     <Compile Include="Models\Berry.cs" />
     <Compile Include="Models\BerryFirmness.cs" />
     <Compile Include="Models\Category.cs" />

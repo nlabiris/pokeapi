@@ -246,5 +246,16 @@ WHERE `id` = @version_group_id";
                 WHERE `id` = @language_id";
             }
         }
+
+        public static string GetSpecificAbilityName {
+            get {
+                return @"
+                SELECT `ability_id`,
+                `local_language_id`,
+                `name`
+                FROM `ability_names`
+                WHERE `ability_id` = @ability_id";
+            }
+        }
     }
 }
