@@ -21,5 +21,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .gitignore to ignore some folders
 
 
-[0.0.1]: https://github.com/norzon/pokeapi/compare/v0.0.1...HEAD
-[0.0.2]: https://github.com/norzon/pokeapi/compare/v0.0.2...HEAD
+[0.0.1]: https://github.com/nlabiris/pokeapi/compare/v0.0.1...HEAD
+[0.0.2]: https://github.com/nlabiris/pokeapi/compare/v0.0.2...HEAD
