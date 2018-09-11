@@ -92,8 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Contexts\PokemonContext.cs" />
     <Compile Include="Contexts\AbilityContext.cs" />
+    <Compile Include="Contexts\BerryContext.cs" />
+    <Compile Include="Contexts\PokemonContext.cs" />
     <Compile Include="DataAccess\Database.cs" />
     <Compile Include="DataAccess\DatabaseConfiguration.cs" />
     <Compile Include="DataAccess\DatabaseExtensions.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Models\AbilityChangelog.cs" />
     <Compile Include="Models\AbilityChangelogProse.cs" />
     <Compile Include="Models\AbilityName.cs" />
+    <Compile Include="Models\AbilityProse.cs" />
     <Compile Include="Models\Berry.cs" />
     <Compile Include="Models\BerryFirmness.cs" />
     <Compile Include="Models\Category.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Move.cs" />
+    <Compile Include="Models\MoveDamageClass.cs" />
     <Compile Include="Models\Nature.cs" />
     <Compile Include="Models\Pocket.cs" />
     <Compile Include="Models\Pokemon.cs" />
@@ -149,9 +152,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AbilityViewModel.cs" />
+    <Compile Include="ViewModels\BerryViewModel.cs" />
     <Compile Include="ViewModels\GenerationViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModel.cs" />
+    <Compile Include="ViewModels\TypeViewModel.cs" />
     <Compile Include="ViewModels\VersionGroupsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

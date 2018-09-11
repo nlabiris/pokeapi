@@ -257,5 +257,98 @@ WHERE `id` = @version_group_id";
                 WHERE `ability_id` = @ability_id";
             }
         }
+
+        public static string GetSpecificAbilityProse {
+            get {
+                return @"
+                SELECT `local_language_id`,
+                `short_effect`,
+                `effect`
+                FROM `ability_prose`
+                WHERE `ability_id` = @ability_id";
+            }
+        }
+
+        public static string GetAllBerries {
+            get {
+                return @"
+                SELECT `id`, 
+                `item_id`, 
+                `firmness_id`, 
+                `natural_gift_power`, 
+                `natural_gift_type_id`, 
+                `size`, 
+                `max_harvest`, 
+                `growth_time`, 
+                `soil_dryness`, 
+                `smoothness` 
+                FROM `berries`";
+            }
+        }
+
+        public static string GetSpecificBerry {
+            get {
+                return @"
+                SELECT `id`, 
+                `item_id`, 
+                `firmness_id`, 
+                `natural_gift_power`, 
+                `natural_gift_type_id`, 
+                `size`, 
+                `max_harvest`, 
+                `growth_time`, 
+                `soil_dryness`, 
+                `smoothness` 
+                FROM `berries`
+                WHERE `id` = @berry_id";
+            }
+        }
+
+        public static string GetSpecificItem {
+            get {
+                return @"
+                SELECT `id`, 
+                `identifier`, 
+                `category_id`, 
+                `cost`, 
+                `fling_power`, 
+                `fling_effect_id`
+                FROM `items`
+                WHERE `id` = @item_id";
+            }
+        }
+
+        public static string GetSpecificBerryFirmness {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`
+                FROM `berry_firmness`
+                WHERE `id` = @firmness_id";
+            }
+        }
+
+        public static string GetAllTypes {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`,
+                `generation_id`,
+                `damage_class_id`
+                FROM `types`";
+            }
+        }
+
+        public static string GetSpecificType {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`,
+                `generation_id`,
+                `damage_class_id`
+                FROM `types`
+                WHERE `id` = @type_id";
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace PokeAPI.Models {
         public bool IsMainSeries { get; set; }
         public List<AbilityChangelog> AbilityChangelog { get; set; }
         public List<AbilityName> AbilityName { get; set; }
+        public List<AbilityProse> AbilityProse { get; set; }
     }
 }

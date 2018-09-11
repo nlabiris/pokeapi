@@ -120,5 +120,28 @@ namespace PokeAPI.ViewModels {
             } // Command
             return abilityNames;
         }
+
+        public List<AbilityProse> RetrieveSpecificAbilityProse(IDbConnection connection, int ability_id) {
+            List<AbilityProse> abilityProses = new List<AbilityProse>();
+            using (IDbCommand command = database.CreateCommand()) {
+                command.Connection = connection;
+                command.CommandText = Query.GetSpecificAbilityProse;
+                command.Prepare();
+                command.AddWithValue("@ability_id", ability_id);
+                using (IDataReader reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        AbilityProse abilityProse = new AbilityProse {
+                            LocalLanguage = new Language {
+                                Id = reader.CheckValue<int>("local_language_id")
+                            },
+                            ShortEffect = reader.CheckObject<string>("short_effect"),
+                            Effect = reader.CheckObject<string>("effect")
+                        };
+                        abilityProses.Add(abilityProse);
+                    }
+                }
+            } // Command
+            return abilityProses;
+        }
     }
 }

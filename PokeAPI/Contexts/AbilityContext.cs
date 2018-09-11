@@ -71,6 +71,13 @@ namespace PokeAPI.Contexts {
                             an.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, an.LocalLanguage.Id);
                         }
                     }
+
+                    a.AbilityProse = VM_Ability.RetrieveSpecificAbilityProse(connection, a.Id);
+                    foreach (AbilityProse ap in a.AbilityProse) {
+                        if (ap != null && ap.LocalLanguage != null) {
+                            ap.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, ap.LocalLanguage.Id);
+                        }
+                    }
                 } // foreach
                 connection.Close();
             } // Connection
@@ -113,6 +120,13 @@ namespace PokeAPI.Contexts {
                 foreach (AbilityName an in ability.AbilityName) {
                     if (an != null && an.LocalLanguage != null) {
                         an.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, an.LocalLanguage.Id);
+                    }
+                }
+
+                ability.AbilityProse = VM_Ability.RetrieveSpecificAbilityProse(connection, ability_id);
+                foreach (AbilityProse ap in ability.AbilityProse) {
+                    if (ap != null && ap.LocalLanguage != null) {
+                        ap.LocalLanguage = VM_Language.RetrieveSpecificLanguage(connection, ap.LocalLanguage.Id);
                     }
                 }
                 connection.Close();
