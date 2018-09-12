@@ -8,6 +8,6 @@ namespace PokeAPI.Models {
         public int Id { get; set; }
         public string Identifier { get; set; }
         public Generation Generation { get; set; }
-        public MoveDamageClass MoveDamageClass { get; set; }
+        public DamageClass DamageClass { get; set; }
     }
 }

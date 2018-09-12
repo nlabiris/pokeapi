@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace PokeAPI.Models {
-    public class MoveDamageClass {
+    public class DamageClass {
         public int Id { get; set; }
         public string Identifier { get; set; }
     }

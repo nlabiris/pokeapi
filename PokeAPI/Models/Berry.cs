@@ -15,5 +15,6 @@ namespace PokeAPI.Models {
         public int GrowthTime { get; set; }
         public int SoilDryness { get; set; }
         public int Smoothness { get; set; }
+        public List<BerryFlavor> BerryFlavors { get; set; }
     }
 }

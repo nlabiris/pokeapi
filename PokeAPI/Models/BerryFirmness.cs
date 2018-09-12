@@ -7,5 +7,6 @@ namespace PokeAPI.Models {
     public class BerryFirmness {
         public int Id { get; set; }
         public string Identifier { get; set; }
+        public List<BerryFirmnessName> BerryFirmnessName { get; set; }
     }
 }
