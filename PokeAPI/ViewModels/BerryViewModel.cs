@@ -93,5 +93,49 @@ namespace PokeAPI.ViewModels {
             } // Command
             return berryFirmness;
         }
+
+        public List<BerryFirmnessName> RetrieveSpecificBerryFirmnessName(IDbConnection connection, int firmness_id) {
+            List<BerryFirmnessName> berryFirmnessNames = new List<BerryFirmnessName>();
+            using (IDbCommand command = database.CreateCommand()) {
+                command.Connection = connection;
+                command.CommandText = Query.GetSpecificBerryFirmnessName;
+                command.Prepare();
+                command.AddWithValue("@firmness_id", firmness_id);
+                using (IDataReader reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        BerryFirmnessName berryFirmnessName = new BerryFirmnessName {
+                            LocalLanguage = new Language {
+                                Id = reader.CheckValue<int>("local_language_id"),
+                            },
+                            Name = reader.CheckObject<string>("name")
+                        };
+                        berryFirmnessNames.Add(berryFirmnessName);
+                    }
+                }
+            } // Command
+            return berryFirmnessNames;
+        }
+
+        public List<BerryFlavor> RetrieveSpecificBerryFlavor(IDbConnection connection, int berry_id) {
+            List<BerryFlavor> berryFlavors = new List<BerryFlavor>();
+            using (IDbCommand command = database.CreateCommand()) {
+                command.Connection = connection;
+                command.CommandText = Query.GetSpecificBerryFlavor;
+                command.Prepare();
+                command.AddWithValue("@berry_id", berry_id);
+                using (IDataReader reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        BerryFlavor berryFlavor = new BerryFlavor {
+                            ContestType = new ContestType {
+                                Id = reader.CheckValue<int>("contest_type_id"),
+                            },
+                            Flavor = reader.CheckValue<int>("flavor")
+                        };
+                        berryFlavors.Add(berryFlavor);
+                    }
+                }
+            } // Command
+            return berryFlavors;
+        }
     }
 }

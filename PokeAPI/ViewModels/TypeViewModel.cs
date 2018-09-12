@@ -23,7 +23,7 @@ namespace PokeAPI.ViewModels {
                             Generation = new Generation {
                                 Id = reader.CheckValue<int>("generation_id"),
                             },
-                            MoveDamageClass = new MoveDamageClass {
+                            DamageClass = new DamageClass {
                                 Id = reader.CheckValue<int>("damage_class_id"),
                             }
                         };
@@ -49,7 +49,7 @@ namespace PokeAPI.ViewModels {
                             Generation = new Generation {
                                 Id = reader.CheckValue<int>("generation_id"),
                             },
-                            MoveDamageClass = new MoveDamageClass {
+                            DamageClass = new DamageClass {
                                 Id = reader.CheckValue<int>("damage_class_id"),
                             }
                         };
