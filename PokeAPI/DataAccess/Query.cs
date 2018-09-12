@@ -350,5 +350,45 @@ WHERE `id` = @version_group_id";
                 WHERE `id` = @type_id";
             }
         }
+
+        public static string GetSpecificDamageClass {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`
+                FROM `move_damage_classes`
+                WHERE `id` = @damage_class_id";
+            }
+        }
+
+        public static string GetSpecificBerryFirmnessName {
+            get {
+                return @"
+                SELECT `local_language_id`,
+                `name`
+                FROM `berry_firmness_names`
+                WHERE `berry_firmness_id` = @firmness_id";
+            }
+        }
+
+        public static string GetSpecificBerryFlavor {
+            get {
+                return @"
+                SELECT `contest_type_id`,
+                `flavor`
+                FROM `berry_flavors`
+                WHERE `berry_id` = @berry_id";
+            }
+        }
+
+        public static string GetSpecificContestType {
+            get {
+                return @"
+                SELECT `id`,
+                `identifier`
+                FROM `contest_types`
+                WHERE `id` = @contest_type_id";
+            }
+        }
     }
 }

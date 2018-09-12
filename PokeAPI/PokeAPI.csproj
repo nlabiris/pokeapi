@@ -124,9 +124,12 @@
     <Compile Include="Models\AbilityProse.cs" />
     <Compile Include="Models\Berry.cs" />
     <Compile Include="Models\BerryFirmness.cs" />
+    <Compile Include="Models\BerryFirmnessName.cs" />
+    <Compile Include="Models\BerryFlavor.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\ContestType.cs" />
+    <Compile Include="Models\DamageClass.cs" />
     <Compile Include="Models\EggGroup.cs" />
     <Compile Include="Models\EvolutionChain.cs" />
     <Compile Include="Models\FlingEffects.cs" />
@@ -136,7 +139,6 @@
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Move.cs" />
-    <Compile Include="Models\MoveDamageClass.cs" />
     <Compile Include="Models\Nature.cs" />
     <Compile Include="Models\Pocket.cs" />
     <Compile Include="Models\Pokemon.cs" />
@@ -153,9 +155,13 @@
     </Compile>
     <Compile Include="ViewModels\AbilityViewModel.cs" />
     <Compile Include="ViewModels\BerryViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\ContestTypeViewModel.cs" />
+    <Compile Include="ViewModels\DamageClassViewModel.cs" />
     <Compile Include="ViewModels\GenerationViewModel.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\LanguageViewModel.cs" />
+    <Compile Include="ViewModels\PocketViewModel.cs" />
     <Compile Include="ViewModels\RegionViewModel.cs" />
     <Compile Include="ViewModels\TypeViewModel.cs" />
     <Compile Include="ViewModels\VersionGroupsViewModel.cs" />
