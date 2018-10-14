@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Gitlab](https://gitlab.com/directsolutions/snippets/pdowrapper).
+We accept contributions via Pull Requests on [Github](https://github.com/nlabiris/pokeapi).
 
 
 ## Pull Requests
