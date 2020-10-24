@@ -1,0 +1,704 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\linq2db.MySql.3.1.5\build\linq2db.MySql.props" Condition="Exists('..\packages\linq2db.MySql.3.1.5\build\linq2db.MySql.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9CD4869-AF97-41FB-B470-88AD56745A11}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Infrastructure</RootNamespace>
+    <AssemblyName>Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.1.11\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="linq2db, Version=3.1.5.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.3.1.5\lib\net46\linq2db.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.21\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.5\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.21\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.21\lib\net452\Zstandard.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Business\Data\SessionDataStoringManager.cs" />
+    <Compile Include="DependencyInjection\Bindings.cs" />
+    <Compile Include="Core\Business\BusinessResult.cs" />
+    <Compile Include="Core\Business\BusinessState.cs" />
+    <Compile Include="Core\Business\Data\BusinessData.cs" />
+    <Compile Include="Core\Business\Data\BusinessError.cs" />
+    <Compile Include="Core\Business\Data\BusinessErrorCode.cs" />
+    <Compile Include="Core\Business\Data\BusinessErrorType.cs" />
+    <Compile Include="Core\Business\Data\BusinessStatus.cs" />
+    <Compile Include="Core\Business\Data\BusinessWarningCode.cs" />
+    <Compile Include="Core\Business\Interfaces\ISessionDataStoringManager.cs" />
+    <Compile Include="Core\Business\Interfaces\IBusinessData.cs" />
+    <Compile Include="Core\Business\Interfaces\IBusinessError.cs" />
+    <Compile Include="Core\Business\Interfaces\IBusinessResult.cs" />
+    <Compile Include="Core\Business\Interfaces\IBusinessState.cs" />
+    <Compile Include="Core\DataAccess\Interfaces\IRepository.cs" />
+    <Compile Include="Core\DataAccess\Repositories\SqlRepository.cs" />
+    <Compile Include="Logging\NLogger.cs" />
+    <Compile Include="Managers\AbilityManager.cs" />
+    <Compile Include="Managers\Interfaces\IAbilityManager.cs" />
+    <Compile Include="Managers\Interfaces\IBaseManager.cs" />
+    <Compile Include="Core\DataAccess\Interfaces\IGenericDatabaseRepository.cs" />
+    <Compile Include="Core\DataAccess\Interfaces\ISqlRepository.cs" />
+    <Compile Include="Managers\BaseManager.cs" />
+    <Compile Include="Core\DataAccess\DatabaseContext.cs" />
+    <Compile Include="Core\DataAccess\Repositories\GenericDatabaseRepository.cs" />
+    <Compile Include="Logging\Interfaces\ILogger.cs" />
+    <Compile Include="Models\AbilitiesView.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ability.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbilityChangelog.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbilityChangelogProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbilityFlavorText.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbilityName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbilityProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Berry.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BerryFirmness.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BerryFirmnessName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BerryFlavor.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Characteristic.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CharacteristicText.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestEpisode.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestEpisodeName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestEpisodeWarrior.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestKingdom.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestKingdomName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMaxLink.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveData.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveDisplacement.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveDisplacementProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveEffect.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveEffectProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveRange.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestMoveRangeProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestPokemonAbility.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestPokemonEvolution.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestPokemonMove.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestPokemonStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestStatName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestTransformationPokemon.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestTransformationWarrior.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarrior.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorArchetype.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorRank.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorRankStatMap.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorSkill.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorSkillName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorSpecialty.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorStatName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConquestWarriorTransformation.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContestCombo.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContestEffect.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContestEffectProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContestType.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContestTypeName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EggGroup.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EggGroupProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Encounter.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterCondition.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterConditionProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterConditionValue.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterConditionValueMap.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterConditionValueProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterMethod.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterMethodProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EncounterSlot.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EvolutionChain.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EvolutionTrigger.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EvolutionTriggerProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Experience.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gender.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Generation.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GenerationName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GrowthRate.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GrowthRateProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Item.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemCategory.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemCategoryProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlag.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlagMap.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlagProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlavorSummary.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlavorText.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlingEffect.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemFlingEffectProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemGameIndex.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemPocket.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemPocketName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItemProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Language.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LanguageName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationArea.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationAreaEncounterRate.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationAreaProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationGameIndex.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Machine.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Move.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveBattleStyle.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveBattleStyleProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveChangelog.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveDamageClass.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveDamageClassProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveEffect.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveEffectChangelog.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveEffectChangelogProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveEffectProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveFlag.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveFlagMap.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveFlagProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveFlavorSummary.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveFlavorText.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveMeta.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveMetaAilment.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveMetaAilmentName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveMetaCategory.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveMetaCategoryProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveMetaStatChange.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveTarget.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MoveTargetProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Nature.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NatureBattleStylePreference.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NatureName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NaturePokeathlonStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PalPark.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PalParkArea.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PalParkAreaName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PkmnDB.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokeathlonStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokeathlonStatName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pokedex.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokedexProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokedexVersionGroup.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pokemon.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonAbility.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonColor.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonColorName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonDexNumber.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonEggGroup.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonEvolution.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonForm.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonFormGeneration.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonFormName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonFormPokeathlonStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonGameIndex.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonHabitat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonHabitatName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonItem.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonMove.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonMoveMethod.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonMoveMethodProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonShape.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonShapeProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonSpecies.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonSpeciesFlavorSummary.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonSpeciesFlavorText.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonSpeciesName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonSpeciesProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonStat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PokemonType.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Region.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegionName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stat.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StatName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SuperContestCombo.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SuperContestEffect.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SuperContestEffectProse.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TableExtensions.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TypeEfficacy.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TypeGameIndex.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TypeName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Version.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VersionGroup.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VersionGroupPokemonMoveMethod.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VersionGroupRegion.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VersionName.cs">
+      <DependentUpon>GeneratePOCOsMultipleFiles.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="CodeGenerators\MultiFileSupport.ttinclude" />
+    <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
+    <None Include="LinqToDB.Templates\DataModel.ttinclude" />
+    <None Include="LinqToDB.Templates\EditableObject.ttinclude" />
+    <None Include="LinqToDB.Templates\Equatable.ttinclude" />
+    <None Include="LinqToDB.Templates\Humanizer.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.MySql.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.MySql.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.ttinclude" />
+    <None Include="LinqToDB.Templates\MultipleFiles.ttinclude" />
+    <None Include="LinqToDB.Templates\NotifyDataErrorInfo.ttinclude" />
+    <None Include="LinqToDB.Templates\NotifyPropertyChanged.ttinclude" />
+    <None Include="LinqToDB.Templates\ObsoleteAttributes.ttinclude" />
+    <None Include="LinqToDB.Templates\PluralizationService.ttinclude" />
+    <None Include="LinqToDB.Templates\T4Model.ttinclude" />
+    <None Include="LinqToDB.Templates\Validation.ttinclude" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeGenerators\GenerateOriginalPOCOs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GenerateOriginalPOCOs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeGenerators\GeneratePOCOsMultipleFiles.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GeneratePOCOsMultipleFiles.cs</LastGenOutput>
+    </Content>
+    <Content Include="LinqToDB.Templates\CopyMe.MySql.tt.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\linq2db.MySql.3.1.5\build\linq2db.MySql.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.MySql.3.1.5\build\linq2db.MySql.props'))" />
+  </Target>
+</Project>

@@ -1,0 +1,26 @@
+﻿<#@ template language="C#" debug="True" hostSpecific="True" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Xml" #>
+<#@ include file="$(ProjectDir)LinqToDB.Templates\LinqToDB.MySql.Tools.ttinclude" #>
+<#@ include file="$(ProjectDir)LinqToDB.Templates\PluralizationService.ttinclude" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ include file="$(ProjectDir)CodeGenerators\MultiFileSupport.ttinclude" #>
+<#
+	// Namespace to use for generated model
+	NamespaceName = "Infrastructure.Models";
+	BaseEntityClass = "BusinessData";
+
+	LoadMySqlMetadata("localhost", "dbname", "username", "password");
+	
+	Model.Usings.Add("Infrastructure.Core.Business.Data");
+
+	GenerateModel();
+
+	//and now
+	SyncProject(); 
+#>
